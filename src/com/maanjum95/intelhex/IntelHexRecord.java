@@ -1,6 +1,6 @@
 /*******************************************************************************************************	
  * 	The MIT License (MIT)
- *	Copyright (c) 2015 Muhammad A. Anjum
+ *	Copyright (c) 2015 M. A. Anjum
  *	Email : ma.anjum95@gmail.com
  *	
  *	Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -31,8 +31,9 @@ package com.maanjum95.intelhex;
  * 	5- Data Sequence of n bytes (n hex pairs/2n chars)
  * 	6- Check Sum (a hex pair/two chars) for checking for errors in record.
  * */
+
 /**
- * @author Muhammad
+ * @author M A Anjum
  *
  */
 public class IntelHexRecord {
@@ -53,12 +54,14 @@ public class IntelHexRecord {
 	private byte[] dataSequence;
 	private byte checkSum;
 	
+	// String containing the record
 	private String record;
 	
 	/*
 	 * Takes in a string representing a Intel HEX Record.
 	 * 
 	 * @param record a string containing a single record
+	 * 
 	 * @throws CheckSumFailException, IncorrectRecordException
 	 * */
 	IntelHexRecord(String record) throws CheckSumFailException, IncorrectRecordException {
@@ -126,25 +129,27 @@ public class IntelHexRecord {
 		return toReturn;
 	}
 	
-	public String toString() {
-		String toReturn = "";
-		
-		toReturn += "Record: " + this.record + "\n";
-		toReturn += "Byte Count: " + this.byteCount + "\n";
-		toReturn += "Addr High: " + this.addrH + "\n";
-		toReturn += "Addr Low: " + this.addrL + "\n";
-		toReturn += "Record Type: " + this.recordType + "\n";
-		toReturn += "Check Sum: " + this.checkSum + "\n";
-		return toReturn;
-	}
-	
 	/*
-	 *	Returns the record variable
+	 *	toString method returns a string representation of the record.
 	 *	
-	 *	@return record
+	 *	@return a string representation of the record
 	 * */
-	public String getRecord() {
-		return this.record;
+	public String toString() {
+		String toReturn;
+		
+		toReturn = String.format("Record: %02X\n", this.record);
+		toReturn += String.format("Byte Count: %02X\n", this.byteCount);
+		toReturn += String.format("Address High: %02X\n", this.addrH);
+		toReturn += String.format("Address Low: %02X\n", this.addrL);
+		toReturn += String.format("Record Type: %02X\n", this.recordType);
+		toReturn += String.format("Check Sum: %02X\n", this.checkSum);
+		toReturn += String.format("Record: %02X\n", this.record);
+		
+		toReturn += "Data Bytes:: \n";
+		for (int i = 0; i < this.dataSequence.length; i++) {
+			toReturn += String.format("Byte %03d: %02X\n", i, this.dataSequence[i]);
+		}
+		return toReturn;
 	}
 	
 	/*
@@ -267,11 +272,87 @@ public class IntelHexRecord {
 		return toReturn;
 	}
 	
+	/////////////////////////////// GETTER METHODS ////////////////////////////////
+	/*
+	 *	Returns the record formatted string.
+	 *	
+	 *	@return record
+	 * */
+	public String getRecord() {
+		return this.record;
+	}
+	
+	/*
+	 *	Returns the number of data bytes.
+	 *	
+	 *	@return byteCount
+	 * */
+	public byte getByteCount() {
+		return this.byteCount;
+	}
+	
+	/*
+	 *	Returns the 8 MSBits of 16-bit address.
+	 *	
+	 *	@return addrH
+	 * */
+	public byte getAddrH() {
+		return this.addrH;
+	}
+	
+	/*
+	 *	Returns the 8 LSBits of 16-bit address.
+	 *	
+	 *	@return addrL
+	 * */
+	public byte getAddrL() {
+		return this.addrL;
+	}
+	
+	/*
+	 *	Returns the record variable
+	 *	
+	 *	@return record
+	 * */
+	public byte getRecordType() {
+		return this.recordType;
+	}
+	
+	/*
+	 *	Returns the data bytes in an array
+	 *	
+	 *	@return dataSequence
+	 * */
+	public byte[] getDataSequence() {
+		return this.dataSequence;
+	}
+	
+	/*
+	 *	Returns the Check Sum
+	 *	
+	 *	@return checkSum
+	 * */
+	public byte getCheckSum() {
+		return this.checkSum;
+	}
+	
+	////////////////// EXCEPTION CLASSES USED BY THE IntelHexRecord CLASS /////////////////////
 	public static class IncorrectRecordException extends Exception {
+		/*
+		 *	IncorrectRecordException: generic can be caused because of a number of reasons all having to do with an incorrect record
+		 *
+		 *	@param exception a string just to let the user know what went wrong
+		 * */
 		IncorrectRecordException(String exception) {
 			super("IncorrectRecordException: " + exception);
 		}
 		
+		/*
+		 *	IncorrectRecordException: caused by a non hex character in the string excluding the very first colon ':'
+		 *
+		 *	@param ch the non-hex character.
+		 *	@param index the index of non-hex character in the record string.
+		 * */
 		IncorrectRecordException(char ch, int index) {
 			super(String.format("IncorrectRecordException: Incorrect character found: %c at index %d", ch, index));
 		}
@@ -280,6 +361,9 @@ public class IntelHexRecord {
 	public static class CheckSumFailException extends Exception {
 		/*
 		 *	CheckSumFailException: caused by the difference in the acutal CheckSum and the calculated
+		 *
+		 *	@param calcCheckSum the calculated check sum
+		 *	@param actualCheckSum the actual check sum
 		 * */
 		CheckSumFailException(byte calcCheckSum, byte actualCheckSum) {
 			super(String.format("CheckSumException: The calculated checksum %X is not equal to one in the record %X.", calcCheckSum, actualCheckSum));
