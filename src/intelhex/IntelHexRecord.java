@@ -62,7 +62,7 @@ public class IntelHexRecord {
 	 * 
 	 * @throws CheckSumFailException, IncorrectRecordException
 	 * */
-	IntelHexRecord(String record) throws CheckSumFailException, IncorrectRecordException {
+	public IntelHexRecord(String record) throws CheckSumFailException, IncorrectRecordException {
 		this.checkValidityOfRecord(record);
 		try { 	// Since the byteCount may be wrong and the size of record might be smaller
 			this.readAndStoreRecordFields(record);	
@@ -83,7 +83,7 @@ public class IntelHexRecord {
 	 *
 	 *	@throws IncorrectRecordException
 	 * */
-	IntelHexRecord(byte byteCount, byte addrH, byte addrL,
+	public IntelHexRecord(byte byteCount, byte addrH, byte addrL,
 			byte recordType, byte[] dataSequence) throws IncorrectRecordException {
 		this.byteCount = byteCount;
 		this.addrH = addrH;
