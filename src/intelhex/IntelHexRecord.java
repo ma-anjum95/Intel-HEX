@@ -1,4 +1,7 @@
 /*******************************************************************************************************	
+ * 	File Name: IntelHexRecord.java
+ * 	@author M. A. Anjum
+ * 
  * 	The MIT License (MIT)
  *	Copyright (c) 2015 M. A. Anjum
  *	Email : ma.anjum95@gmail.com
@@ -18,7 +21,7 @@
  *	DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF 
  *	OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ********************************************************************************************************/
-package com.maanjum95.intelhex;
+package intelhex;
 
 /*
  *	This class represent a single Record of Intel HEX file.
@@ -129,6 +132,7 @@ public class IntelHexRecord {
 	 *	
 	 *	@return a string representation of the record
 	 * */
+	@Override
 	public String toString() {
 		String toReturn;
 		

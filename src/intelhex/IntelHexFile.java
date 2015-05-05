@@ -1,6 +1,9 @@
 /*******************************************************************************************************	
+ * 	File Name: IntelHexFile.java
+ * 	@author M. A. Anjum
+ * 	
  * 	The MIT License (MIT)
- *	Copyright (c) 2015 Muhammad A. Anjum
+ *	Copyright (c) 2015 M. A. Anjum
  *	Email : ma.anjum95@gmail.com
  *	
  *	Permission is hereby granted, free of charge, to any person obtaining a copy of this software
@@ -18,7 +21,10 @@
  *	DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF 
  *	OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ********************************************************************************************************/
-package com.maanjum95.intelhex;
+package intelhex;
+
+import intelhex.IntelHexRecord.CheckSumFailException;
+import intelhex.IntelHexRecord.IncorrectRecordException;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,9 +34,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.maanjum95.intelhex.IntelHexRecord.CheckSumFailException;
-import com.maanjum95.intelhex.IntelHexRecord.IncorrectRecordException;
 
 public class IntelHexFile {
 
