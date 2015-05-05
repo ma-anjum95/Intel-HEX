@@ -31,11 +31,6 @@ package com.maanjum95.intelhex;
  * 	5- Data Sequence of n bytes (n hex pairs/2n chars)
  * 	6- Check Sum (a hex pair/two chars) for checking for errors in record.
  * */
-
-/**
- * @author M A Anjum
- *
- */
 public class IntelHexRecord {
 	
 	// The different type of records which is used in Intel HEX Records.
